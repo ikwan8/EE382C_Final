@@ -18,7 +18,7 @@ public class Bitonicsort {
         for(int i =0; i < logn; i++){
             for(int j = 0; j <= i; j++){
                 kernel(list, i, j);
-                System.out.println(list);
+                //System.out.println(list);
             }
         }
         threadpool.shutdown();

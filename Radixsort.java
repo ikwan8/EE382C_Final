@@ -100,7 +100,7 @@ public class Radixsort {
 
         @Override
         public ArrayList<Integer> call() throws ExecutionException, InterruptedException {
-            if(isSorted() || onlyDuplicates(list)){
+            if(isSorted() || onlyDuplicates(list) || exp < 0){
                 return combined();
             }
             else {

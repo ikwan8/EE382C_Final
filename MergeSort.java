@@ -1,8 +1,6 @@
 /**
  * Created by Ian on 11/10/2016.
  */
-package EE382C_Final;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;

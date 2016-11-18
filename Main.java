@@ -1,8 +1,3 @@
-
-import EE382C_Final.MergeSort;
-import EE382C_Final.Radixsort;
-import EE382C_Final.QuickSort;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -17,7 +12,14 @@ public class Main {
     static int numThreads = 1;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        while(listSize <= 32768) {
+
+        ArrayList<Long> mergeResult = new ArrayList();
+        ArrayList<Long> quickResult = new ArrayList();
+        ArrayList<Long> radixResult = new ArrayList();
+        ArrayList<Long> bitonicResult = new ArrayList();
+        ArrayList<Long> brickResult = new ArrayList();
+
+        while(listSize <= 16384) {
             ArrayList<Integer> mergeList = new ArrayList();
             ArrayList<Integer> quickList = new ArrayList();
             ArrayList<Integer> radixList = new ArrayList();
@@ -43,7 +45,8 @@ public class Main {
                 long startTime = System.nanoTime();
                 mergesorter.mergesort(mergeList);
                 long endTime = System.nanoTime();
-                System.out.println("Merge Sort timing (ns): " + (endTime - startTime) + "\n");
+                mergeResult.add(endTime - startTime);
+//                System.out.println("Merge Sort timing (ns): " + (endTime - startTime) + "\n");
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -56,7 +59,8 @@ public class Main {
             long startTime = System.nanoTime();
             quicksorter.quicksort(quickList);
             long endTime = System.nanoTime();
-            System.out.println("quick Sort timing (ns): " + (endTime - startTime) + "\n");
+            quickResult.add(endTime - startTime);
+//            System.out.println("quick Sort timing (ns): " + (endTime - startTime) + "\n");
 
 
             System.out.println("Running Radix Sort");
@@ -65,7 +69,8 @@ public class Main {
                 startTime = System.nanoTime();
                 ArrayList<Integer> radixResults = radixsorter.radixsort(radixList);
                 endTime = System.nanoTime();
-                System.out.println("Radix sort timing (ns):" + (endTime - startTime) + "\n");
+                radixResult.add(endTime - startTime);
+//                System.out.println("Radix sort timing (ns):" + (endTime - startTime) + "\n");
 
             } catch (ExecutionException e) {
                 e.printStackTrace();
@@ -78,7 +83,8 @@ public class Main {
             startTime = System.nanoTime();
             bricksorter.bricksort(brickList);
             endTime = System.nanoTime();
-            System.out.println("Brick timing (ns): " + (endTime - startTime) + "\n");
+            brickResult.add(endTime - startTime);
+//            System.out.println("Brick timing (ns): " + (endTime - startTime) + "\n");
 
 
             System.out.println("Running Bitonic Sort");
@@ -86,12 +92,19 @@ public class Main {
             startTime = System.nanoTime();
             bitonicsorter.bitonicsort(bitonicList, simpleLogn(listSize));
             endTime = System.nanoTime();
-            System.out.println("Bitonic timing (ns): " + (endTime - startTime) + "\n");
+            bitonicResult.add(endTime - startTime);
+//            System.out.println("Bitonic timing (ns): " + (endTime - startTime) + "\n");
 
             listSize*=2;
             numThreads*=2;
         }
 
+        System.out.println("Results in order of: merge, quick, radix, bitonic, brick");
+        System.out.println(mergeResult);
+        System.out.println(quickResult);
+        System.out.println(radixResult);
+        System.out.println(bitonicResult);
+        System.out.println(brickResult);
     }
 
     static int simpleLogn(int listSize){

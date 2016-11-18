@@ -1,5 +1,3 @@
-package EE382C_Final;
-
 /**
  * Created by Ian on 11/15/2016.
  */
